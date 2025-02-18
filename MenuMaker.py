@@ -1,9 +1,5 @@
 import datetime as dt
-from time import sleep
 from os import system, name
-
-from PyColor_V2 import color_text
-
 
 class MenuMaker():
     def __init__(self, menu_options, logo_file=None, enable_timestamp=False):
@@ -26,12 +22,7 @@ class MenuMaker():
             current_datetime = dt.datetime.now()
             return(current_datetime.strftime(" %A, %B %d - %H:%M:%S"))
         else:
-            return None
-        
-    #### Error Related Methods ####
-    def build_error_message(self, error_message):
-        display_message = "ERROR - " + error_message
-        return color_text(fgc="red", msg=display_message)    
+            return None 
         
     #### Menu Display Methods ###
     def clear_screen(self):
@@ -62,7 +53,7 @@ class MenuMaker():
         menu_selection = input(" Menu Selection : ")
         
         if menu_selection not in valid_selections:
-            print(self.build_error_message(f"This selection, '{menu_selection}', is invalid. Please enter a valid selection."))
+            print(f"This selection, '{menu_selection}', is invalid. Please enter a valid selection.")
             input()
             self.clear_screen()
             self.build_menu()
