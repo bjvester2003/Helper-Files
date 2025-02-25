@@ -1,3 +1,6 @@
+## KNOWN ERRORS
+# 1) Not really an error, text coloring both the text and background colors will not display the text color in a VS code terminal. Everything works properly in a normal terminal
+
 class PyColor():
     def __init__(self, fgc:str="default", bgc:str="default", underline:bool=False, msg:str="default"):
         self.fgc_code = self.set_foreground_color_code(fgc)
@@ -7,7 +10,7 @@ class PyColor():
         
         self.colored_text = self.color_text()
         
-    def set_foreground_color_code(fgc):
+    def set_foreground_color_code(self, fgc):
         foreground_color_codes = {
             "black"	         :30,
             "red"	         :31,
@@ -28,12 +31,9 @@ class PyColor():
             "bright_white"	 :97,
         }
     
-        if fgc in foreground_color_codes:
-            return foreground_color_codes[fgc]
-        else:
-            return foreground_color_codes["default"]
+        return foreground_color_codes[fgc]
         
-    def set_background_color_code(bgc):
+    def set_background_color_code(self, bgc):
         background_color_codes = {
             "black"	         :40,
             "red"	         :41,
@@ -54,10 +54,7 @@ class PyColor():
             "bright_white"	 :107,
         }
 
-        if bgc in background_color_codes:
-            return background_color_codes[bgc]
-        else:
-            return background_color_codes["default"]
+        return background_color_codes[bgc]
         
     def color_text(self):
         reset_code = f"\033[0m"
@@ -68,5 +65,4 @@ class PyColor():
             color_code = f"\033[{self.fgc_code};{self.bgc_code}m"
             
         modified_message = f"{color_code}{self.message}{reset_code}"
-        
         return modified_message
